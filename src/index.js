@@ -1,4 +1,5 @@
 /* eslint-disable max-classes-per-file */
+import { BookCollection } from '../modules/bookCollection';
 
 const collection = new BookCollection();
 collection.initialize();
