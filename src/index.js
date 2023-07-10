@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable max-classes-per-file */
+import { DateTime } from 'luxon';
 import { BookCollection } from '../modules/bookCollection';
 
 const collection = new BookCollection();
@@ -25,4 +27,11 @@ contact.addEventListener('click', () => {
   welcomeMessage.style.display = 'none';
   booksCollection.style.display = 'block';
   newBook.style.display = 'block';
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const currentDateElement = document.getElementById('current-date');
+  const now = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
+
+  currentDateElement.textContent = now;
 });
