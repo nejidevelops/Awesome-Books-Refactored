@@ -1,13 +1,12 @@
 /* eslint-disable import/prefer-default-export */
-import { Book } from './book';
+import { Book } from './book.js';
 
 export class BookCollection {
   constructor() {
     this.books = this.getBooks();
   }
 
-  /* eslint-disable-next-line */
-  addBookToList(book) {
+  addBookToList = (book) => {
     const list = document.querySelector('#collection');
 
     const bookDisplay = document.createElement('div');
@@ -21,10 +20,9 @@ export class BookCollection {
     `;
 
     list.appendChild(bookDisplay);
-  }
+  };
 
-  /* eslint-disable-next-line */
-  getBooks() {
+  getBooks = () => {
     let books;
     if (localStorage.getItem('books') === null) {
       books = [];
@@ -33,29 +31,28 @@ export class BookCollection {
     }
 
     return books;
-  }
+  };
 
-  displayBooks() {
+  displayBooks = () => {
     this.books.forEach((book) => this.addBookToList(book));
-  }
+  };
 
-  addBook(book) {
+  addBook = (book) => {
     this.books.push(book);
     localStorage.setItem('books', JSON.stringify(this.books));
-  }
+  };
 
-  removeBook(title) {
+  removeBook = (title) => {
     this.books = this.books.filter((book) => book.title !== title);
     localStorage.setItem('books', JSON.stringify(this.books));
-  }
+  };
 
-  /* eslint-disable-next-line */
-  clearFields() {
+  clearFields = () => {
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
-  }
+  };
 
-  handleFormSubmit(event) {
+  handleFormSubmit = (event) => {
     event.preventDefault();
 
     const title = document.querySelector('#title').value;
@@ -66,17 +63,17 @@ export class BookCollection {
     this.addBookToList(book);
     this.addBook(book);
     this.clearFields();
-  }
+  };
 
-  handleCollectionClick(event) {
+  handleCollectionClick = (event) => {
     if (event.target.classList.contains('delete')) {
       const bookTitle = event.target.parentElement.querySelector('.bookTitle').textContent;
       event.target.parentElement.remove();
       this.removeBook(bookTitle);
     }
-  }
+  };
 
-  initialize() {
+  initialize = () => {
     document.addEventListener('DOMContentLoaded', () => {
       this.displayBooks();
     });
@@ -88,5 +85,5 @@ export class BookCollection {
     document.querySelector('#collection').addEventListener('click', (event) => {
       this.handleCollectionClick(event);
     });
-  }
+  };
 }
